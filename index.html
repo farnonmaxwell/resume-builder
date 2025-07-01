@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Builder - Empower Over 50</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+            color: #2c3e50;
+            line-height: 1.6;
+            padding: 20px 0;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.2em;
+            margin-bottom: 10px;
+            font-weight: 300;
+        }
+
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .form-container {
+            padding: 40px;
+        }
+
+        .section {
+            margin-bottom: 35px;
+            padding: 25px;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            background: #fdfdfd;
+        }
+
+        .section h3 {
+            color: #495057;
+            margin-bottom: 20px;
+            font-size: 1.3em;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 8px;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-row {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .input-row > div {
+            flex: 1;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 500;
+            color: #495057;
+        }
+
+        input[type="text"], input[type="email"], input[type="tel"], textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e9ecef;
+            border-radius: 6px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .enhance-btn {
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            margin-top: 8px;
+            transition: background-color 0.3s;
+        }
+
+        .enhance-btn:hover {
+            background: #218838;
+        }
+
+        .work-entry, .education-entry {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            border-left: 4px solid #667eea;
+        }
+
+        .add-btn {
+            background: #6c757d;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+
+        .add-btn:hover {
+            background: #5a6268;
+        }
+
+        .remove-btn {
+            background: #dc3545;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+            float: right;
+        }
+
+        .remove-btn:hover {
+            background: #c82333;
+        }
+
+        .generate-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 8px;
+            font-size: 18px;
+            cursor: pointer;
+            display: block;
+            margin: 30px auto;
+            transition: transform 0.2s;
+        }
+
+        .generate-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .resume-preview {
+            background: white;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            padding: 40px;
+            margin: 30px 0;
+            font-family: 'Times New Roman', serif;
+            line-height: 1.5;
+            display: none;
+        }
+
+        .resume-preview h2 {
+            color: #2c3e50;
+            border-bottom: 2px solid #2c3e50;
+            padding-bottom: 5px;
+            margin: 20px 0 10px 0;
+        }
+
+        .resume-preview h1 {
+            text-align: center;
+            margin-bottom: 5px;
+            color: #2c3e50;
+        }
+
+        .contact-info {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #6c757d;
+        }
+
+        .export-buttons {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .export-btn {
+            background: #17a2b8;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 0 10px;
+            font-size: 14px;
+        }
+
+        .export-btn:hover {
+            background: #138496;
+        }
+
+        .footer {
+            background: #495057;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+        }
+
+        .footer a {
+            color: #667eea;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .skill-tag {
+            background: #e9ecef;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 14px;
+            border: 1px solid #dee2e6;
+        }
+
+        .loading {
+            display: inline-block;
+            margin-left: 10px;
+            color: #6c757d;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Professional Resume Builder</h1>
+            <p>Create a compelling resume that showcases your experience and expertise</p>
+        </div>
+
+        <div class="form-container">
+            <!-- Contact Information -->
+            <div class="section">
+                <h3>Contact Information</h3>
+                <div class="input-row">
+                    <div>
+                        <label for="fullName">Full Name *</label>
+                        <input type="text" id="fullName" placeholder="John Smith" required>
+                    </div>
+                    <div>
+                        <label for="email">Email Address *</label>
+                        <input type="email" id="email" placeholder="john.smith@email.com" required>
+                    </div>
+                </div>
+                <div class="input-row">
+                    <div>
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" placeholder="(555) 123-4567">
+                    </div>
+                    <div>
+                        <label for="location">City, State</label>
+                        <input type="text" id="location" placeholder="Denver, CO">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Professional Summary -->
+            <div class="section">
+                <h3>Professional Summary (Optional)</h3>
+                <div class="input-group">
+                    <label for="summary">Professional Summary</label>
+                    <textarea id="summary" placeholder="Experienced professional with 25+ years in customer service management. Proven track record of building strong client relationships and leading successful teams. Skilled in problem-solving, strategic planning, and mentoring junior staff members."></textarea>
+                    <button class="enhance-btn" onclick="enhanceText('summary')">Improve this section</button>
+                </div>
+            </div>
+
+            <!-- Work History -->
+            <div class="section">
+                <h3>Work Experience</h3>
+                <div id="workHistory">
+                    <div class="work-entry">
+                        <button class="remove-btn" onclick="removeEntry(this)">Remove</button>
+                        <div class="input-row">
+                            <div>
+                                <label>Job Title *</label>
+                                <input type="text" class="jobTitle" placeholder="Customer Service Manager" required>
+                            </div>
+                            <div>
+                                <label>Company Name *</label>
+                                <input type="text" class="company" placeholder="ABC Corporation" required>
+                            </div>
+                        </div>
+                        <div class="input-row">
+                            <div>
+                                <label>Start Date</label>
+                                <input type="text" class="startDate" placeholder="January 2015">
+                            </div>
+                            <div>
+                                <label>End Date</label>
+                                <input type="text" class="endDate" placeholder="Present">
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <label>Key Responsibilities & Achievements</label>
+                            <textarea class="workDescription" placeholder="Led a regional team of 12 and increased client retention by 18% over two years. Implemented new training protocols that reduced customer complaints by 25%. Mentored junior staff members, with 80% receiving promotions within 18 months."></textarea>
+                            <button class="enhance-btn" onclick="enhanceWorkDescription(this)">Enhance for clarity & results</button>
+                        </div>
+                    </div>
+                </div>
+                <button class="add-btn" onclick="addWorkEntry()">Add Another Position</button>
+            </div>
+
+            <!-- Education -->
+            <div class="section">
+                <h3>Education</h3>
+                <div id="education">
+                    <div class="education-entry">
+                        <button class="remove-btn" onclick="removeEntry(this)">Remove</button>
+                        <div class="input-row">
+                            <div>
+                                <label>Degree/Certification</label>
+                                <input type="text" class="degree" placeholder="Bachelor of Arts in Business Administration">
+                            </div>
+                            <div>
+                                <label>Institution</label>
+                                <input type="text" class="school" placeholder="State University">
+                            </div>
+                        </div>
+                        <div class="input-row">
+                            <div>
+                                <label>Year Completed</label>
+                                <input type="text" class="gradYear" placeholder="1995">
+                            </div>
+                            <div>
+                                <label>Additional Details (Optional)</label>
+                                <input type="text" class="eduDetails" placeholder="Magna Cum Laude, Dean's List">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button class="add-btn" onclick="addEducationEntry()">Add Another Education Entry</button>
+            </div>
+
+            <!-- Skills -->
+            <div class="section">
+                <h3>Skills</h3>
+                <div class="input-group">
+                    <label for="skills">Core Skills (separate with commas)</label>
+                    <textarea id="skills" placeholder="Team Leadership, Customer Relationship Management, Project Management, Strategic Planning, Staff Training, Budget Management, Problem Solving, Communication, Microsoft Office Suite, Data Analysis"></textarea>
+                    <button class="enhance-btn" onclick="enhanceText('skills')">Improve this section</button>
+                </div>
+            </div>
+
+            <!-- Additional Sections -->
+            <div class="section">
+                <h3>Certifications & Volunteer Work (Optional)</h3>
+                <div class="input-group">
+                    <label for="additional">Certifications, Volunteer Work, Awards, etc.</label>
+                    <textarea id="additional" placeholder="Certified Project Management Professional (PMP) - 2018&#10;Volunteer Coordinator, Local Food Bank - 2020-Present&#10;Employee of the Year Award - ABC Corporation - 2019"></textarea>
+                    <button class="enhance-btn" onclick="enhanceText('additional')">Improve this section</button>
+                </div>
+            </div>
+
+            <button class="generate-btn" onclick="generateResume()">Generate My Resume</button>
+<button class="add-btn" onclick="clearForm()">Clear Resume</button>
+
+
+            <!-- Resume Preview -->
+            <div id="resumePreview" class="resume-preview">
+                <div class="export-buttons">
+                    <button class="export-btn" onclick="copyResume()">Copy Resume Text</button>
+                    <button class="export-btn" onclick="downloadResume()">Download as .TXT</button>
+<button class="export-btn" onclick="window.print()">Download as PDF</button>
+
+                </div>
+                <div id="resumeContent"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>Created by <a href="https://www.youtube.com/@EmpowerOver50" target="_blank">Empower Over 50</a> — helping people redefine their second act with clarity and confidence.</p>
+    </div>
+
+    <script>
+        // AI Enhancement Functions (placeholder for future API integration)
+        function enhanceText(elementId) {
+            const element = document.getElementById(elementId);
+            const originalText = element.value.trim();
+            
+            if (!originalText) {
+                alert('Please enter some text first before enhancing.');
+                return;
+            }
+
+            // Show loading state
+            const button = event.target;
+            const originalText_btn = button.textContent;
+            button.innerHTML = originalText_btn + ' <span class="loading">Enhancing...</span>';
+            button.disabled = true;
+
+            // Simulate AI processing delay
+            setTimeout(() => {
+                const enhancedText = rewriteText(originalText, elementId);
+                element.value = enhancedText;
+                
+                // Reset button
+                button.textContent = originalText_btn;
+                button.disabled = false;
+            }, 1500);
+        }
+
+        function enhanceWorkDescription(button) {
+            const textarea = button.previousElementSibling;
+            const originalText = textarea.value.trim();
+            
+            if (!originalText) {
+                alert('Please enter some text first before enhancing.');
+                return;
+            }
+
+            // Show loading state
+            const originalText_btn = button.textContent;
+            button.innerHTML = originalText_btn + ' <span class="loading">Enhancing...</span>';
+            button.disabled = true;
+
+            // Simulate AI processing delay
+            setTimeout(() => {
+                const enhancedText = rewriteText(originalText, 'work');
+                textarea.value = enhancedText;
+                
+                // Reset button
+                button.textContent = originalText_btn;
+                button.disabled = false;
+            }, 1500);
+        }
+
+        function rewriteText(text, type) {
+            // Placeholder AI enhancement function
+            // In a real implementation, this would call an AI API
+            
+            const enhancements = {
+                summary: [
+                    "Seasoned professional with 25+ years of progressive experience in customer service leadership and organizational excellence. Demonstrated expertise in building high-performing teams, driving client satisfaction improvements, and implementing strategic initiatives that deliver measurable business results.",
+                    "Results-driven executive with extensive background in customer service management and team development. Proven ability to enhance operational efficiency, strengthen client relationships, and mentor emerging talent while consistently exceeding performance targets.",
+                    "Dynamic leader with over two decades of success in customer service operations and staff development. Expert in strategic planning, process optimization, and relationship building with a track record of transforming team performance and customer satisfaction metrics."
+                ],
+                work: [
+                    "• Directed cross-functional team of 12 professionals, achieving 18% improvement in client retention through strategic relationship management and service excellence initiatives\n• Spearheaded comprehensive training program implementation, resulting in 25% reduction in customer complaints and enhanced service quality metrics\n• Mentored and developed junior staff members, achieving 80% internal promotion rate within 18-month period through targeted coaching and performance management",
+                    "• Orchestrated regional team operations encompassing 12 direct reports, delivering exceptional 18% increase in client retention rates through innovative service strategies\n• Championed organizational training protocol redesign, yielding substantial 25% decrease in customer complaints and improved operational efficiency\n• Cultivated high-performance culture through strategic mentorship initiatives, resulting in remarkable 80% promotion rate for junior staff within 18 months",
+                    "• Led dynamic team of 12 customer service professionals, driving measurable 18% growth in client retention through exceptional relationship management and service innovation\n• Designed and executed transformative training initiatives that eliminated 25% of customer complaints while elevating overall service standards\n• Developed emerging talent through structured mentorship programs, achieving outstanding 80% advancement rate for junior team members"
+                ],
+                skills: [
+                    "Executive Leadership & Team Development, Advanced Customer Relationship Management, Strategic Project Management & Execution, Organizational Planning & Process Optimization, Comprehensive Staff Training & Development, Financial Planning & Budget Administration, Complex Problem Resolution, Executive Communication & Presentation, Advanced Microsoft Office Suite & Business Applications, Strategic Data Analysis & Performance Metrics",
+                    "Senior-Level Team Leadership, Customer Experience Management, Project Management Excellence, Strategic Business Planning, Employee Development & Training, Budget Management & Financial Oversight, Strategic Problem Solving, Professional Communication & Stakeholder Engagement, Technology Proficiency & Digital Tools, Business Intelligence & Analytics",
+                    "Transformational Leadership, Client Relationship Excellence, Project Management & Strategic Execution, Organizational Development & Change Management, Training Program Design & Implementation, Financial Management & Resource Allocation, Critical Thinking & Solution Development, Executive Communication Skills, Business Technology & Digital Platforms, Performance Analysis & Continuous Improvement"
+                ],
+                additional: [
+                    "Professional Project Management Certification (PMP) - Project Management Institute, 2018\nCommunity Leadership Role: Volunteer Program Coordinator, Regional Food Bank - 2020-Present\nRecognition: Outstanding Performance Award, ABC Corporation - 2019\nProfessional Development: Advanced Leadership Certificate Program - 2020",
+                    "Certified Project Management Professional (PMP) - Achieved 2018, Maintained Current\nVolunteer Leadership: Program Coordinator & Strategic Advisor, Local Food Bank - 2020-Present\nProfessional Recognition: Employee Excellence Award, ABC Corporation - 2019\nContinuous Learning: Executive Leadership Development Program Graduate - 2020",
+                    "Project Management Institute Certification (PMP) - 2018 (Current)\nCommunity Impact: Senior Volunteer Coordinator, Regional Food Distribution Network - 2020-Present\nProfessional Achievement: Annual Excellence in Leadership Award - ABC Corporation, 2019\nProfessional Development: Completed Advanced Management Certificate Program - 2020"
+                ]
+            };
+
+            let options;
+            if (type === 'work') {
+                options = enhancements.work;
+            } else if (type === 'summary') {
+                options = enhancements.summary;
+            } else if (type === 'skills') {
+                options = enhancements.skills;
+            } else if (type === 'additional') {
+                options = enhancements.additional;
+            } else {
+                // Generic enhancement
+                return text.replace(/\b\w/g, l => l.toUpperCase());
+            }
+
+            // Return a random enhanced version
+            return options[Math.floor(Math.random() * options.length)];
+        }
+
+        // Work Entry Management
+        function addWorkEntry() {
+            const workHistory = document.getElementById('workHistory');
+            const newEntry = document.createElement('div');
+            newEntry.className = 'work-entry';
+            newEntry.innerHTML = `
+                <button class="remove-btn" onclick="removeEntry(this)">Remove</button>
+                <div class="input-row">
+                    <div>
+                        <label>Job Title *</label>
+                        <input type="text" class="jobTitle" placeholder="Job Title" required>
+                    </div>
+                    <div>
+                        <label>Company Name *</label>
+                        <input type="text" class="company" placeholder="Company Name" required>
+                    </div>
+                </div>
+                <div class="input-row">
+                    <div>
+                        <label>Start Date</label>
+                        <input type="text" class="startDate" placeholder="Month Year">
+                    </div>
+                    <div>
+                        <label>End Date</label>
+                        <input type="text" class="endDate" placeholder="Month Year or Present">
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label>Key Responsibilities & Achievements</label>
+                    <textarea class="workDescription" placeholder="Describe your key responsibilities and achievements in this role..."></textarea>
+                    <button class="enhance-btn" onclick="enhanceWorkDescription(this)">Enhance for clarity & results</button>
+                </div>
+            `;
+            workHistory.appendChild(newEntry);
+        }
+
+        // Education Entry Management
+        function addEducationEntry() {
+            const education = document.getElementById('education');
+            const newEntry = document.createElement('div');
+            newEntry.className = 'education-entry';
+            newEntry.innerHTML = `
+                <button class="remove-btn" onclick="removeEntry(this)">Remove</button>
+                <div class="input-row">
+                    <div>
+                        <label>Degree/Certification</label>
+                        <input type="text" class="degree" placeholder="Degree or Certification">
+                    </div>
+                    <div>
+                        <label>Institution</label>
+                        <input type="text" class="school" placeholder="School or Institution">
+                    </div>
+                </div>
+                <div class="input-row">
+                    <div>
+                        <label>Year Completed</label>
+                        <input type="text" class="gradYear" placeholder="Year">
+                    </div>
+                    <div>
+                        <label>Additional Details (Optional)</label>
+                        <input type="text" class="eduDetails" placeholder="Honors, GPA, etc.">
+                    </div>
+                </div>
+            `;
+            education.appendChild(newEntry);
+        }
+
+        // Remove Entry Function
+        function removeEntry(button) {
+            button.parentElement.remove();
+        }
+
+        // Resume Generation
+        function generateResume() {
+            const name = document.getElementById('fullName').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const location = document.getElementById('location').value;
+            const summary = document.getElementById('summary').value;
+            const skills = document.getElementById('skills').value;
+            const additional = document.getElementById('additional').value;
+
+            if (!name || !email) {
+                alert('Please fill in at least your name and email address.');
+                return;
+            }
+
+            let resumeHTML = `<h1>${name}</h1>`;
+            
+            // Contact Info
+            let contactInfo = [];
+            if (email) contactInfo.push(email);
+            if (phone) contactInfo.push(phone);
+            if (location) contactInfo.push(location);
+            
+            resumeHTML += `<div class="contact-info">${contactInfo.join(' | ')}</div>`;
+
+            // Professional Summary
+            if (summary.trim()) {
+                resumeHTML += `<h2>Professional Summary</h2><p>${summary}</p>`;
+            }
+
+            // Work Experience
+            const workEntries = document.querySelectorAll('.work-entry');
+            if (workEntries.length > 0) {
+                resumeHTML += `<h2>Professional Experience</h2>`;
+                workEntries.forEach(entry => {
+                    const jobTitle = entry.querySelector('.jobTitle').value;
+                    const company = entry.querySelector('.company').value;
+                    const startDate = entry.querySelector('.startDate').value;
+                    const endDate = entry.querySelector('.endDate').value;
+                    const description = entry.querySelector('.workDescription').value;
+
+                    if (jobTitle && company) {
+                        resumeHTML += `<p><strong>${jobTitle}</strong> | ${company}`;
+                        if (startDate || endDate) {
+                            resumeHTML += ` | ${startDate} - ${endDate}`;
+                        }
+                        resumeHTML += `</p>`;
+                        if (description) {
+                            resumeHTML += `<p>${description.replace(/\n/g, '<br>')}</p>`;
+                        }
+                        resumeHTML += `<br>`;
+                    }
+                });
+            }
+
+            // Education
+            const educationEntries = document.querySelectorAll('.education-entry');
+            if (educationEntries.length > 0) {
+                resumeHTML += `<h2>Education</h2>`;
+                educationEntries.forEach(entry => {
+                    const degree = entry.querySelector('.degree').value;
+                    const school = entry.querySelector('.school').value;
+                    const year = entry.querySelector('.gradYear').value;
+                    const details = entry.querySelector('.eduDetails').value;
+
+                    if (degree || school) {
+                        resumeHTML += `<p><strong>${degree}</strong>`;
+                        if (school) resumeHTML += ` | ${school}`;
+                        if (year) resumeHTML += ` | ${year}`;
+                        if (details) resumeHTML += ` | ${details}`;
+                        resumeHTML += `</p>`;
+                    }
+                });
+            }
+
+            // Skills
+            if (skills.trim()) {
+                resumeHTML += `<h2>Core Skills</h2><p>${skills}</p>`;
+            }
+
+            // Additional Information
+            if (additional.trim()) {
+                resumeHTML += `<h2>Certifications & Additional Information</h2><p>${additional.replace(/\n/g, '<br>')}</p>`;
+            }
+
+            document.getElementById('resumeContent').innerHTML = resumeHTML;
+            document.getElementById('resumePreview').style.display = 'block';
+            
+            // Scroll to preview
+            document.getElementById('resumePreview').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Copy Resume Function
+        function copyResume() {
+            const resumeContent = document.getElementById('resumeContent');
+            const textContent = resumeContent.innerText || resumeContent.textContent;
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(textContent).then(() => {
+                    alert('Resume copied to clipboard!');
+                });
+            } else {
+                // Fallback for older browsers
+                const textArea = document.createElement('textarea');
+                textArea.value = textContent;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                alert('Resume copied to clipboard!');
+            }
+        }
+
+        // Download Resume Function
+        function downloadResume() {
+            const resumeContent = document.getElementById('resumeContent');
+            const textContent = resumeContent.innerText || resumeContent.textContent;
+            const fileName = document.getElementById('fullName').value.replace(/\s+/g, '_') + '_Resume.txt';
+            
+            const blob = new Blob([textContent], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = fileName;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+    
+        function clearForm() {
+            if (!confirm("Are you sure you want to clear the form? This will remove all inputs.")) return;
+            document.querySelectorAll('input[type="text"], input[type="email"], input[type="tel"], textarea').forEach(el => el.value = "");
+            document.getElementById('resumeContent').innerHTML = "";
+            document.getElementById('resumePreview').style.display = 'none';
+            localStorage.clear();
+        }
+
+        // Auto-save form data to localStorage
+        window.addEventListener('load', () => {
+            const fields = document.querySelectorAll('input, textarea');
+            fields.forEach(field => {
+                const id = field.id || field.className;
+                if (!id) return;
+                const saved = localStorage.getItem(id);
+                if (saved) field.value = saved;
+
+                field.addEventListener('input', () => {
+                    localStorage.setItem(id, field.value);
+                });
+            });
+        });
+
+</script>
+</body>
+</html>
